@@ -1,12 +1,26 @@
-# React + Vite
+# 📌 Trackr
+Trackr is a student-focused tool designed to simplify the process of keeping up with important academic deadlines. Whether it's getting notified about upcoming exams or staying on top of college application forms, Trackr has your back.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 🚀 Features
+- 🔔 Exam Notifications: Get timely alerts for upcoming school or competitive exams.
 
-Currently, two official plugins are available:
+- 📝 College Form Reminders: Stay informed about application deadlines for various colleges.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 📅 Organized Dashboard: View all important dates in one place.
 
-## Expanding the ESLint configuration
+- 🧠 Made for Students: Built with the needs of students in mind — no clutter, just what you need.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# 💡 Why Trackr?
+Every year, thousands of students miss out on opportunities simply because they forget to apply or aren't aware of upcoming deadlines. Trackr solves this by offering a centralized system that keeps students informed and prepared.
+
+# 🛠️ Tech Stack
+Frontend: React
+
+Backend: TBD
+
+
+# 🌱 Contributing
+Want to help improve Trackr? Contributions are welcome! Feel free to fork the repo, open issues, or suggest features via pull requests.
+
+# 📬 Stay Updated
+Trackr is actively being improved. Follow the repository to stay informed about new features and updates.
