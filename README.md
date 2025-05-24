@@ -2,7 +2,7 @@
 Trackr is a student-focused tool designed to simplify the process of keeping up with important academic deadlines. Whether it's getting notified about upcoming exams or staying on top of college application forms, Trackr has your back.
 
 # 🚀 Features
-- 🔔 Exam Notifications: Get timely alerts for upcoming school or competitive exams.
+- 🔔 Exam Notifications: Get timely alerts for upcoming college or competitive exams.
 
 - 📝 College Form Reminders: Stay informed about application deadlines for various colleges.
 
