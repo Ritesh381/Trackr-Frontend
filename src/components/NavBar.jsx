@@ -6,10 +6,15 @@ import { LoginContext } from "../context/Login";
 const NavBar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-  const { isLoggedIn } = useContext(LoginContext);
-     const userMenuRef = useRef(null);
+  const { isLoggedIn, logout } = useContext(LoginContext);
+  const userMenuRef = useRef(null);
 
-     useEffect(() => {
+  const user_logOut = () => {
+    logout();
+    setIsUserMenuOpen(false);
+  };
+
+  useEffect(() => {
     const handleClickOutside = (event) => {
       if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
         setIsUserMenuOpen(false);
@@ -119,7 +124,7 @@ const NavBar = () => {
                   Settings
                 </Link>
                 <button className="w-full flex items-center px-4 py-2 hover:bg-gray-100">
-                  <LogOut size={18} className="mr-2" />
+                  <LogOut size={18} className="mr-2" onClick={user_logOut} />
                   Logout
                 </button>
               </div>
@@ -128,8 +133,9 @@ const NavBar = () => {
                 <Link
                   to="/login"
                   className="w-full block px-4 py-2 hover:bg-gray-100"
+                  onClick={() => setIsUserMenuOpen(false)}
                 >
-                  Login / Signup
+                  Login/Signup
                 </Link>
               </div>
             ))}
