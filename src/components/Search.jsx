@@ -17,18 +17,6 @@ function Search() {
       </form>
       <div className='flex m-5 flex-wrap gap-8 justify-center px-4'>
         <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
       </div>
     </div>
   )
