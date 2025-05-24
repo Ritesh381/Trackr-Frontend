@@ -37,6 +37,7 @@ const NavBar = () => {
         >
           Deadlines
         </Link>
+        <Link to="/announcements" ></Link>
       </div>
 
       <div className="flex items-center gap-4 relative z-30">
@@ -44,7 +45,7 @@ const NavBar = () => {
         <Link
           to="/dashboard"
           className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-white font-semibold"
-        >
+        >a
           Dashboard
         </Link>
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { use } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
@@ -39,6 +40,20 @@ function App() {
       </Routes>
       </div>
       <Footer/>
+=======
+import React from 'react'
+import "./App.css"
+import Home from './components/Home'
+import NavBar from './components/NavBar'
+function App() {
+  useEffect(() => {
+    AOS.init({ duration: 800 , once: true , offset:100 });
+  }, []);
+  return (
+    <div>
+      <NavBar></NavBar>
+      <Home></Home>
+>>>>>>> 78fae900fc1d9aaf5911b24207096cac8713451b
     </div>
   );
 }
