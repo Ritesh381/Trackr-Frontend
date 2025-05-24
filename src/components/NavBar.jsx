@@ -2,7 +2,6 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { User, LogOut } from "lucide-react";
 import { LoginContext } from "../context/Login";
-import DeadlineWindow from "./DeadlineWindow";
 
 const NavBar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -32,21 +31,16 @@ const NavBar = () => {
         <Link to="/" className="text-2xl font-bold">
           Trackr
         </Link>
-        <Link to="/deadline" className="text-bold hidden md:block px-4 py-2 rounded hover:bg-gray-800">
+        <Link
+          to="/deadline"
+          className="text-bold hidden md:block px-4 py-2 rounded hover:bg-gray-800"
+        >
           Deadlines
         </Link>
       </div>
 
-      <div className="hidden md:flex w-full max-w-md justify-center">
-  <input
-    type="text"
-    placeholder="Search Colleges..."
-    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-  />
-</div>
-
-
       <div className="flex items-center gap-4 relative z-30">
+        <Link to="/search" className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-white font-semibol">Search</Link>
         <Link
           to="/dashboard"
           className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-white font-semibold"

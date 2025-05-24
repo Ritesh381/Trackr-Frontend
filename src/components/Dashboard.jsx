@@ -17,7 +17,7 @@ function Dashboard() {
         <h1>{user && `Hello, ${user}`}</h1>
         {/* colleges he have applied to: */}
         <div>
-            
+            Dashbaord
         </div>
 
     </div>
