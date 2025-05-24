@@ -1,9 +1,6 @@
 import axios from 'axios';
-
-const BASE_URL = import.meta.env.VITE_BASE_URL;
-
 const instance = axios.create({
-  baseURL: BASE_URL,
+  baseURL: "https://trackr-backend-lnuq.onrender.com/api/v1",
 });
 
 export default instance;

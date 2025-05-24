@@ -1,29 +1,62 @@
-import React from 'react';
-import { useState } from 'react';
+import React from "react";
+import { useState } from "react";
+import api from "../assets/axios";
 
 export const LoginContext = React.createContext();
 
 export const LoginProvider = ({ children }) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [user, setUser] = useState(null);
-    
-    const login = (userData) => {
-        setUser(userData);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
+
+  const login = (userData) => {
+    console.log(userData)
+    api
+      .post("/login", {
+        email: userData.email,
+        password: userData.password,
+      })
+      .then((response) => {
+        console.log(response);
+
+        setUser(response.data.user);
         setIsLoggedIn(true);
-        localStorage.setItem('user', JSON.stringify(userData));
-        localStorage.setItem('isLoggedIn', true);
-    };
-    
-    const logout = () => {
-        setUser(null);
-        setIsLoggedIn(false);
-        localStorage.removeItem('user');
-        localStorage.removeItem('isLoggedIn');
-    };
-    
-    return (
-        <LoginContext.Provider value={{ isLoggedIn, user, login, logout }}>
-        {children}
-        </LoginContext.Provider>
-    );
-    }
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        localStorage.setItem("isLoggedIn", true);
+      })
+      .catch((err) => {
+        console.error("Login failed:", err);
+      });
+  };    
+
+  const signup = (userData) => {
+    api
+      .post("/signup", {
+        email: userData.email,
+        password: userData.password,
+        username: userData.username,
+      })
+      .then((response) => {
+        console.log(response);
+        setUser(response.data.user);
+        setIsLoggedIn(true);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        localStorage.setItem("isLoggedIn", true);
+      })
+      .catch((err) => {
+        console.error("Signup failed:", err);
+      });
+  };
+
+  const logout = () => {
+    setUser(null);
+    setIsLoggedIn(false);
+    localStorage.removeItem("user");
+    localStorage.removeItem("isLoggedIn");
+  };
+
+  return (
+    <LoginContext.Provider value={{ isLoggedIn, user, login, logout, signup }}>
+      {children}
+    </LoginContext.Provider>
+  );
+};

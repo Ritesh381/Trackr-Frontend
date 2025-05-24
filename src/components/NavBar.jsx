@@ -27,75 +27,21 @@ const NavBar = () => {
   }, []);
   return (
     <nav className="flex items-center justify-between bg-gray-900 px-8 py-4 text-white relative">
-      {/* Left side  */}
       <div className="flex items-center gap-8">
         <Link to="/" className="text-2xl font-bold">
           Trackr
         </Link>
-
-        {/* Mobile Hamburger Icon */}
-        <div className="md:hidden">
-          <button
-            onClick={() => {
-              setIsMobileMenuOpen((prev) => !prev);
-              setIsUserMenuOpen(false);
-            }}
-            className="focus:outline-none"
-            aria-label="Open Menu"
-          >
-            <svg
-              width="24"
-              height="24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-        </div>
-
-        <div className="hidden md:flex gap-6">
-          <Link to="/home" className="hover:text-gray-300">
-            Home
-          </Link>
-          <Link to="/announcements" className="hover:text-gray-300">
-            Announcements
-          </Link>
-          <Link to="/deadlines" className="hover:text-gray-300">
-            Deadlines
-          </Link>
-        </div>
       </div>
 
-      {/* Mobile Dropdown Menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-16 left-0 w-full bg-gray-900 z-20 flex flex-col items-start px-8 py-4 gap-2 shadow-lg">
-          <Link
-            to="/"
-            className="hover:text-gray-300 w-full py-2"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Home
-          </Link>
-          <Link
-            to="/announcements"
-            className="hover:text-gray-300 w-full py-2"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Announcements
-          </Link>
-          <Link
-            to="/deadlines"
-            className="hover:text-gray-300 w-full py-2"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Deadlines
-          </Link>
-        </div>
-      )}
+      <div className="hidden md:flex w-full max-w-md justify-center">
+  <input
+    type="text"
+    placeholder="Search Colleges..."
+    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+  />
+</div>
 
-      {/* Right Side */}
+
       <div className="flex items-center gap-4 relative z-30">
         <Link
           to="/dashboard"
