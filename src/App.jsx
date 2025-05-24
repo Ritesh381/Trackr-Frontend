@@ -12,6 +12,7 @@ import DeadlineWindow from './components/DeadlineWindow';
 import Landing from './components/Landing'
 import 'aos/dist/aos.css';
 import AOS from 'aos';
+import Info from './components/Info';
 import Contact from './components/Contact';
 
 function App() {
@@ -35,6 +36,8 @@ function App() {
         <Route path='/register' element={<Signup/>}></Route>
         <Route path='/announcements' element={<Announcements/>}></Route>
         <Route path='/search' element={<Search/>}></Route>
+        <Route path="/info" element={<Info/>}></Route>
+        <Route path="/" element={<Landing/>}></Route>
         <Route path='/contact' element={<Contact/>}></Route>
       </Routes>
       </div>
