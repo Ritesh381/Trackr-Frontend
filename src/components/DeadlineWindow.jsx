@@ -6,13 +6,10 @@ function DeadlineWindow() {
   const [hasMore, setHasMore] = useState(true);
   const [skip, setSkip] = useState(0);
   const limit = 5;
-  const scrollContainerRef = useRef(null);
-  const autoscrollIntervalRef = useRef(null);
-  const userActiveRef = useRef(false);
 
   const fetchDeadlines = async () => {
     setLoading(true);
-    const response = await fetch(`/api/deadlines?skip=${skip}&limit=${limit}`);
+    const response = await fetch(`jsonplaceholder.typicode.com/posts?_limit=${limit}&_start=${skip}`);
     const data = await response.json();
     setLoading(false);
     if (data.length === 0) {
@@ -23,43 +20,14 @@ function DeadlineWindow() {
     setSkip(prev => prev + limit);
   };
 
-  const startAutoscroll = () => {
-    if (autoscrollIntervalRef.current) clearInterval(autoscrollIntervalRef.current);
-    autoscrollIntervalRef.current = setInterval(() => {
-      if (scrollContainerRef.current && !userActiveRef.current) {
-        const { scrollTop, scrollHeight, clientHeight } = scrollContainerRef.current;
-        if (scrollTop + clientHeight < scrollHeight) {
-          scrollContainerRef.current.scrollTop += 1; 
-        } else if (hasMore && !loading) {
-          fetchDeadlines();
-        }
-      }
-    }, 100); 
-  };
-
-  const handleUserScroll = () => {
-    userActiveRef.current = true;
-    clearInterval(autoscrollIntervalRef.current);
-    setTimeout(() => {
-      userActiveRef.current = false;
-      startAutoscroll();
-    }, 5000);
-  };
-
   useEffect(() => {
     fetchDeadlines();
-    startAutoscroll();
-    return () => {
-      clearInterval(autoscrollIntervalRef.current);
-    };
   }, []);
 
   return (
-    <div className="flex justify-end p-20">
+    <div className="flex justify-end p-4 md:p-8 lg:p-20">
         <div
-        ref={scrollContainerRef}
-        onScroll={handleUserScroll}
-        className="h-120 w-140 overflow-auto border-2 border-gray-300 p-4"
+        className="h-64 md:h-72 lg:h-96 w-64 md:w-72 lg:w-96 overflow-auto border-2 border-gray-300 p-4"
         >
         {deadlines.map((deadline, index) => (
             <div key={index} className="mb-4">

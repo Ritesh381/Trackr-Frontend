@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { User, LogOut } from "lucide-react";
 import { LoginContext } from "../context/Login";
+import DeadlineWindow from "./DeadlineWindow";
 
 const NavBar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -30,6 +31,9 @@ const NavBar = () => {
       <div className="flex items-center gap-8">
         <Link to="/" className="text-2xl font-bold">
           Trackr
+        </Link>
+        <Link to="/deadline" className="text-bold hidden md:block px-4 py-2 rounded hover:bg-gray-800">
+          Deadlines
         </Link>
       </div>
 

@@ -11,6 +11,7 @@ import Signup from './components/Signup';
 import Announcements from './components/Announcements';
 import Footer from './components/Footer';
 import Search from './components/Search';
+import DeadlineWindow from './components/DeadlineWindow';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
       <Routes>
         {/* <Route path="/" element={<Landing />} /> */}
         <Route path="/home" element={<Home />} />
-        <Route path="/deadlines" element={<Deadline />} />
+        <Route path="/deadline" element={<DeadlineWindow />} />
         <Route path='/dashboard' element={<Dashboard/>} />
         <Route path='/login' element={<Login/>} />
         <Route path='/signup' element={<Signup/>}></Route>
