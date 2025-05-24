@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import api from "../assets/axios";
+import { useNavigate } from "react-router-dom";
 
 export const LoginContext = React.createContext();
 
 export const LoginProvider = ({ children }) => {
+  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
 
@@ -41,7 +43,7 @@ export const LoginProvider = ({ children }) => {
   };
 
   const signup = (userData) => {
-    if (!userData.username || !userData.email || !userData.password) {
+    if (!userData.email || !userData.password) {
       console.error("Missing username, email, or password");
       return;
     }
@@ -55,10 +57,7 @@ export const LoginProvider = ({ children }) => {
       })
       .then((response) => {
         console.log("Signup successful:", response.data);
-        setUser(response.data.user);
-        setIsLoggedIn(true);
-        localStorage.setItem("user", JSON.stringify(response.data.user));
-        localStorage.setItem("isLoggedIn", "true");
+        navigate("/login");
       })
       .catch((err) => {
         console.error("Signup failed:", err?.response?.data || err.message);

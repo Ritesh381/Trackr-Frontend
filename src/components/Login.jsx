@@ -88,8 +88,8 @@ function Login() {
         </form>
         <p className="text-center text-sm text-gray-600 mt-4">
           Don't have an account?{" "}
-          <Link to="/signup" className="text-blue-600 hover:underline">
-            Create one
+          <Link to="/register" className="text-blue-600 hover:underline">
+            Register Now
           </Link>
         </p>
       </div>

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { User, LogOut } from "lucide-react";
+import { User, LogOut, Menu, X } from "lucide-react";
 import { LoginContext } from "../context/Login";
 
 const NavBar = () => {
@@ -9,7 +9,7 @@ const NavBar = () => {
   const { isLoggedIn, logout } = useContext(LoginContext);
   const userMenuRef = useRef(null);
 
-  const user_logOut = () => {
+  const user_logout = () => {
     logout();
     setIsUserMenuOpen(false);
   };
@@ -25,66 +25,112 @@ const NavBar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
   return (
-    <nav className="flex items-center justify-between bg-gray-900 px-8 py-4 text-white relative">
-      <div className="flex items-center gap-8">
-        <Link to="/" className="text-2xl font-bold">
-          Trackr
-        </Link>
-        <Link
-          to="/deadline"
-          className="text-bold hidden md:block px-4 py-2 rounded hover:bg-gray-800"
-        >
-          Deadlines
-        </Link>
-      </div>
+    <nav className="bg-gray-900 text-white px-6 py-4 relative">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <Link to="/" className="text-2xl font-bold">
+            Trackr
+          </Link>
+          <div className="hidden md:flex gap-4">
+            <Link to="/deadline" className="hover:bg-gray-800 px-3 py-2 rounded">
+              Deadlines
+            </Link>
+            <Link to="/search" className="hover:bg-gray-800 px-3 py-2 rounded">
+              Search
+            </Link>
+          </div>
+        </div>
 
-      <div className="flex items-center gap-4 relative z-30">
-        <Link to="/search" className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-white font-semibol">Search</Link>
-        <Link
-          to="/dashboard"
-          className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-white font-semibold"
-        >
-          Dashboard
-        </Link>
+        <div className="flex items-center gap-4">
+          <Link
+            to="/dashboard"
+            className="hidden md:inline-block bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-white font-semibold"
+          >
+            Dashboard
+          </Link>
 
-        <div className="relative" ref={userMenuRef}>
+          <div className="relative" ref={userMenuRef}>
+            <button
+              className="flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-800"
+              onClick={() => {
+                setIsUserMenuOpen((prev) => !prev);
+                setIsMobileMenuOpen(false);
+              }}
+            >
+              <User size={20} />
+            </button>
+            {isUserMenuOpen &&
+              (isLoggedIn ? (
+                <div className="absolute right-0 mt-2 w-40 bg-white text-gray-900 rounded shadow-lg z-10">
+                  <Link
+                    to="/settings"
+                    className="w-full flex items-center px-4 py-2 hover:bg-gray-100"
+                    onClick={() => setIsUserMenuOpen(false)}
+                  >
+                    Settings
+                  </Link>
+                  <button
+                    className="w-full flex items-center px-4 py-2 hover:bg-gray-100"
+                    onClick={user_logout}
+                  >
+                    <LogOut size={18} className="mr-2" />
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <div className="absolute right-0 mt-2 w-40 bg-white text-gray-900 rounded shadow-lg z-10">
+                  <Link
+                    to="/login"
+                    className="w-full block px-4 py-2 hover:bg-gray-100"
+                    onClick={() => setIsUserMenuOpen(false)}
+                  >
+                    Login/Signup
+                  </Link>
+                </div>
+              ))}
+          </div>
+
+          {/* Hamburger Menu Button */}
           <button
-            className="flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-800"
+            className="md:hidden ml-2 focus:outline-none"
             onClick={() => {
-              setIsUserMenuOpen((prev) => !prev);
-              setIsMobileMenuOpen(false);
+              setIsMobileMenuOpen(!isMobileMenuOpen);
+              setIsUserMenuOpen(false);
             }}
           >
-            <User size={20} />
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
-          {isUserMenuOpen &&
-            (isLoggedIn ? (
-              <div className="absolute right-0 mt-2 w-40 bg-white text-gray-900 rounded shadow-lg z-10">
-                <Link
-                  to="/settings"
-                  className="w-full flex items-center px-4 py-2 hover:bg-gray-100"
-                >
-                  Settings
-                </Link>
-                <button className="w-full flex items-center px-4 py-2 hover:bg-gray-100">
-                  <LogOut size={18} className="mr-2" onClick={user_logOut} />
-                  Logout
-                </button>
-              </div>
-            ) : (
-              <div className="absolute right-0 mt-2 w-40 bg-white text-gray-900 rounded shadow-lg z-10">
-                <Link
-                  to="/login"
-                  className="w-full block px-4 py-2 hover:bg-gray-100"
-                  onClick={() => setIsUserMenuOpen(false)}
-                >
-                  Login/Signup
-                </Link>
-              </div>
-            ))}
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden mt-4 bg-gray-800 rounded p-4 space-y-2">
+          <Link
+            to="/dashboard"
+            className="block px-4 py-2 rounded hover:bg-gray-700"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Dashboard
+          </Link>
+          <Link
+            to="/deadline"
+            className="block px-4 py-2 rounded hover:bg-gray-700"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Deadlines
+          </Link>
+          <Link
+            to="/search"
+            className="block px-4 py-2 rounded hover:bg-gray-700"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Search
+          </Link>
+        </div>
+      )}
     </nav>
   );
 };

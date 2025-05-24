@@ -28,13 +28,13 @@ function App() {
       <NavBar />
       <div className="flex-grow">
       <Routes>
+        <Route path="/" element={<Landing/>}></Route>
         <Route path="/deadline" element={<DeadlineWindow />} />
         <Route path='/dashboard' element={<Dashboard/>} />
         <Route path='/login' element={<Login/>} />
-        <Route path='/signup' element={<Signup/>}></Route>
+        <Route path='/register' element={<Signup/>}></Route>
         <Route path='/announcements' element={<Announcements/>}></Route>
         <Route path='/search' element={<Search/>}></Route>
-        <Route path="/" element={<Landing/>}></Route>
         <Route path='/contact' element={<Contact/>}></Route>
       </Routes>
       </div>
