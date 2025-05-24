@@ -14,6 +14,7 @@ import Landing from './components/Landing'
 import 'aos/dist/aos.css';
 import AOS from 'aos';
 import { useEffect } from 'react';
+import Info from './components/Info';
 
 function App() {
   useEffect(() => {
@@ -35,6 +36,7 @@ function App() {
         <Route path='/signup' element={<Signup/>}></Route>
         <Route path='/announcements' element={<Announcements/>}></Route>
         <Route path='/search' element={<Search/>}></Route>
+        <Route path="/info" element={<Info/>}></Route>
         <Route path="/" element={<Landing/>}></Route>
       </Routes>
       </div>

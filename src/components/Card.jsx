@@ -1,8 +1,17 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function Card() {
+    const navigate = useNavigate()
+   
+     function nav(){
+        navigate('/info')
+     } 
+
   return (
-    <div className='border-2 border-blue-200 h-[262px] w-[333px] rounded-2xl place-items-center bg-gradient-to-br from-white to-blue-50 shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-3xl hover:border-blue-300 hover:bg-gradient-to-br hover:from-blue-50 hover:to-white hover:cursor-pointer'>
+    <div className='border-2 border-blue-200 h-[262px] w-[333px] rounded-2xl place-items-center bg-gradient-to-br from-white to-blue-50 shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-3xl hover:border-blue-300 hover:bg-gradient-to-br hover:from-blue-50 hover:to-white hover:cursor-pointer'
+     onClick={nav}
+    >
       <div className='border-2 border-blue-300 w-[330px] h-[122px] rounded-xl place-items-center bg-gradient-to-r from-gray-100 to-gray-200 shadow-inner flex items-center justify-center text-gray-500 font-semibold text-lg'>
         <p>Image</p>
       </div>
