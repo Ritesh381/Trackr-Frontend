@@ -3,7 +3,6 @@ import { Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 // import Landing from './components/Landing';
 import Home from './components/Home';
-import Deadline from './components/Deadline';
 import Dashboard from './components/Dashboard';
 import Login from './components/Login';
 import './App.css';

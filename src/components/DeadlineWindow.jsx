@@ -27,7 +27,7 @@ function DeadlineWindow() {
   return (
     <div className="flex justify-end p-4 md:p-8 lg:p-20">
         <div
-        className="h-64 md:h-72 lg:h-96 w-64 md:w-72 lg:w-96 overflow-auto border-2 border-gray-300 p-4"
+        className="w-full overflow-auto p-4"
         >
         {deadlines.map((deadline, index) => (
             <div key={index} className="mb-4">
