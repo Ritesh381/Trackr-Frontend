@@ -36,6 +36,7 @@ export const LoginProvider = ({ children }) => {
         setIsLoggedIn(true);
         localStorage.setItem("user", JSON.stringify(response.data.user));
         localStorage.setItem("isLoggedIn", "true");
+        navigate("/dashboard");
       })
       .catch((err) => {
         console.error("Login failed:", err?.response?.data || err.message);
