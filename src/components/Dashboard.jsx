@@ -15,7 +15,10 @@ function Dashboard() {
   return (
     <div>
         <h1>{user && `Hello, ${user}`}</h1>
-        
+        {/* colleges he have applied to: */}
+        <div>
+            
+        </div>
 
     </div>
   )

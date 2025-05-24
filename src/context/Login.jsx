@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import api from "../assets/axios";
 
@@ -8,8 +8,17 @@ export const LoginProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    const storedIsLoggedIn = localStorage.getItem("isLoggedIn");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+      setIsLoggedIn(storedIsLoggedIn === "true");
+    }
+  }, []);
+
   const login = (userData) => {
-    console.log(userData)
+    console.log(userData);
     api
       .post("/login", {
         email: userData.email,
@@ -26,7 +35,7 @@ export const LoginProvider = ({ children }) => {
       .catch((err) => {
         console.error("Login failed:", err);
       });
-  };    
+  };
 
   const signup = (userData) => {
     api
