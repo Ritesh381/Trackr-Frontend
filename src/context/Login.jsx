@@ -18,24 +18,30 @@ export const LoginProvider = ({ children }) => {
   }, []);
 
   const login = (userData) => {
-    console.log(userData);
-    api
-      .post("/login", {
-        email: userData.email,
-        password: userData.password,
-      })
-      .then((response) => {
-        console.log(response);
+  if (!userData.email || !userData.password) {
+    console.error("Missing email or password");
+    return;
+  }
 
-        setUser(response.data.user);
-        setIsLoggedIn(true);
-        localStorage.setItem("user", JSON.stringify(response.data.user));
-        localStorage.setItem("isLoggedIn", true);
-      })
-      .catch((err) => {
-        console.error("Login failed:", err);
-      });
-  };
+  console.log("Sending userData:", userData);
+
+  api
+    .post("/users/login", {
+      email: userData.email,
+      password: userData.password,
+    })
+    .then((response) => {
+      console.log("Login successful:", response.data);
+      setUser(response.data.user);
+      setIsLoggedIn(true);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      localStorage.setItem("isLoggedIn", "true");
+    })
+    .catch((err) => {
+      console.error("Login failed:", err?.response?.data || err.message);
+    });
+};
+
 
   const signup = (userData) => {
     api

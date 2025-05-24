@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function Login() {
   const { login } = useContext(LoginContext);
-  const [formData, setFormData] = useState(LoginContext);
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const handleLogin = (e) => {
     e.preventDefault();
@@ -18,7 +18,7 @@ function Login() {
       return;
     }
     setError("");
-    login({ userData: formData });
+    login(formData);
   };
 
   const handleEmailChange = (e) => {
@@ -46,15 +46,15 @@ function Login() {
         <form className="space-y-4">
           <div>
             <label
-              htmlFor="username"
+              htmlFor="email"
               className="block text-sm font-medium text-gray-700 mb-1"
             >
               Email
             </label>
             <input
               type="email"
-              id="username"
-              name="username"
+              id="email"
+              name="email"
               value={formData.email || ""}
               onChange={handleEmailChange}
               required
