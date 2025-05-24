@@ -4,11 +4,10 @@ import { Link } from "react-router-dom";
 
 function Login() {
   const { login } = useContext(LoginContext);
-  const [formData, setFormData] = useState(LoginContext);
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const handleLogin = (e) => {
     e.preventDefault();
-    // Validate form data
     if (!formData.email || !formData.password) {
       setError("Please fill in all fields");
       return;
@@ -18,7 +17,7 @@ function Login() {
       return;
     }
     setError("");
-    login({ userData: formData });
+    login(formData);
   };
 
   const handleEmailChange = (e) => {
@@ -46,15 +45,15 @@ function Login() {
         <form className="space-y-4">
           <div>
             <label
-              htmlFor="username"
+              htmlFor="email"
               className="block text-sm font-medium text-gray-700 mb-1"
             >
               Email
             </label>
             <input
               type="email"
-              id="username"
-              name="username"
+              id="email"
+              name="email"
               value={formData.email || ""}
               onChange={handleEmailChange}
               required
@@ -89,8 +88,8 @@ function Login() {
         </form>
         <p className="text-center text-sm text-gray-600 mt-4">
           Don't have an account?{" "}
-          <Link to="/signup" className="text-blue-600 hover:underline">
-            Create one
+          <Link to="/register" className="text-blue-600 hover:underline">
+            Register Now
           </Link>
         </p>
       </div>
