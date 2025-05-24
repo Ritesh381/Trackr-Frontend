@@ -12,16 +12,13 @@ function Footer() {
         </div>
 
         <div className="container mx-auto mt-4 flex-col">
-          <p>Quick Links</p>
-          <ul>
-            <li className="ml-4">
+          <ul className="flex justify-center gap-10">
+            <li >
               <Link to="/">Home</Link>
             </li>
-            <li className="ml-4">
+            <li >
               <Link to="/deadline">Deadlines</Link>
             </li>
-          </ul>
-          <ul className="mt-2">
             <li>
               <Link to="/contact">Contact Us</Link>
             </li>
