@@ -12,53 +12,56 @@ export const LoginProvider = ({ children }) => {
     const storedUser = localStorage.getItem("user");
     const storedIsLoggedIn = localStorage.getItem("isLoggedIn");
     if (storedUser) {
-      setUser(JSON.parse(storedUser));
+      setUser(storedUser);
       setIsLoggedIn(storedIsLoggedIn === "true");
     }
   }, []);
 
   const login = (userData) => {
-  if (!userData.email || !userData.password) {
-    console.error("Missing email or password");
-    return;
-  }
-
-  console.log("Sending userData:", userData);
-
-  api
-    .post("/users/login", {
-      email: userData.email,
-      password: userData.password,
-    })
-    .then((response) => {
-      console.log("Login successful:", response.data);
-      setUser(response.data.user);
-      setIsLoggedIn(true);
-      localStorage.setItem("user", JSON.stringify(response.data.user));
-      localStorage.setItem("isLoggedIn", "true");
-    })
-    .catch((err) => {
-      console.error("Login failed:", err?.response?.data || err.message);
-    });
-};
-
-
-  const signup = (userData) => {
+    if (!userData.email || !userData.password) {
+      console.error("Missing email or password");
+      return;
+    }
+    console.log("Sending userData:", userData);
     api
-      .post("/signup", {
+      .post("/users/login", {
         email: userData.email,
         password: userData.password,
-        username: userData.username,
       })
       .then((response) => {
-        console.log(response);
+        console.log("Login successful:", response.data);
         setUser(response.data.user);
         setIsLoggedIn(true);
         localStorage.setItem("user", JSON.stringify(response.data.user));
-        localStorage.setItem("isLoggedIn", true);
+        localStorage.setItem("isLoggedIn", "true");
       })
       .catch((err) => {
-        console.error("Signup failed:", err);
+        console.error("Login failed:", err?.response?.data || err.message);
+      });
+  };
+
+  const signup = (userData) => {
+    if (!userData.username || !userData.email || !userData.password) {
+      console.error("Missing username, email, or password");
+      return;
+    }
+
+    console.log("Sending signup data:", userData);
+
+    api
+      .post("/users/signup", {
+        email: userData.email,
+        password: userData.password,
+      })
+      .then((response) => {
+        console.log("Signup successful:", response.data);
+        setUser(response.data.user);
+        setIsLoggedIn(true);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        localStorage.setItem("isLoggedIn", "true");
+      })
+      .catch((err) => {
+        console.error("Signup failed:", err?.response?.data || err.message);
       });
   };
 

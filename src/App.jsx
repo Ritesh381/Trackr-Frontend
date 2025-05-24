@@ -1,7 +1,6 @@
-import React, { use } from 'react';
+import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
-// import Landing from './components/Landing';
 import Dashboard from './components/Dashboard';
 import Login from './components/Login';
 import './App.css';
@@ -13,7 +12,7 @@ import DeadlineWindow from './components/DeadlineWindow';
 import Landing from './components/Landing'
 import 'aos/dist/aos.css';
 import AOS from 'aos';
-import { useEffect } from 'react';
+import Contact from './components/Contact';
 
 function App() {
   useEffect(() => {
@@ -36,6 +35,7 @@ function App() {
         <Route path='/announcements' element={<Announcements/>}></Route>
         <Route path='/search' element={<Search/>}></Route>
         <Route path="/" element={<Landing/>}></Route>
+        <Route path='/contact' element={<Contact/>}></Route>
       </Routes>
       </div>
       <Footer/>

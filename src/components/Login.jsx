@@ -8,7 +8,6 @@ function Login() {
   const [error, setError] = useState("");
   const handleLogin = (e) => {
     e.preventDefault();
-    // Validate form data
     if (!formData.email || !formData.password) {
       setError("Please fill in all fields");
       return;
