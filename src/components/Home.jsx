@@ -1,5 +1,6 @@
 import api from "../assets/axios"
 import React, { useEffect } from 'react'
+import DeadlineWindow from "./DeadlineWindow"
 
 function Home() {
   useEffect(()=>{
@@ -13,6 +14,7 @@ function Home() {
   return (
     <div>
         Trackr home page
+        <DeadlineWindow/>
     </div>
   )
 }
