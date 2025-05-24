@@ -11,6 +11,7 @@ import Announcements from './components/Announcements';
 import Footer from './components/Footer';
 import Search from './components/Search';
 import DeadlineWindow from './components/DeadlineWindow';
+import Landing from './components/Landing'
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path='/signup' element={<Signup/>}></Route>
         <Route path='/announcements' element={<Announcements/>}></Route>
         <Route path='/search' element={<Search/>}></Route>
+        <Route path="/landing" element={<Landing/>}></Route>
       </Routes>
       </div>
       <Footer/>
