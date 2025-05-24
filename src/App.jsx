@@ -14,6 +14,7 @@ import 'aos/dist/aos.css';
 import AOS from 'aos';
 import Info from './components/Info';
 import Contact from './components/Contact';
+import Settings from './components/Settings';
 
 function App() {
   useEffect(() => {
@@ -39,6 +40,7 @@ function App() {
         <Route path="/info" element={<Info/>}></Route>
         <Route path="/" element={<Landing/>}></Route>
         <Route path='/contact' element={<Contact/>}></Route>
+        <Route path="/settings" element={<Settings/>}></Route>
       </Routes>
       </div>
       <Footer/>
