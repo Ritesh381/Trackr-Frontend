@@ -1,23 +1,23 @@
-import React, { useContext } from "react";
 import { LoginContext } from "../context/Login";
 import { Link } from "react-router-dom";
 
-function Login() {
-  const { login } = useContext(LoginContext);
-
-  const handleLogin = () => {
-    // Simulate a login action
-    // login({ userData });
-  };
-
+function Signup() {
+  const handleSignup = () => {};
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
-        <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">Login</h1>
-        <p className="text-center text-gray-600 mb-6">Please enter your credentials to login.</p>
+        <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">
+          Sign Up
+        </h1>
+        <p className="text-center text-gray-600 mb-6">
+          Create your account to get started.
+        </p>
         <form className="space-y-4">
           <div>
-            <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="username"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               Username
             </label>
             <input
@@ -29,7 +29,25 @@ function Login() {
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               Password
             </label>
             <input
@@ -42,16 +60,16 @@ function Login() {
           </div>
           <button
             type="button"
-            onClick={handleLogin}
+            onClick={handleSignup}
             className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-300"
           >
-            Login
+            Sign Up
           </button>
         </form>
         <p className="text-center text-sm text-gray-600 mt-4">
-          Don't have an account?{" "}
-          <Link to="/signup" className="text-blue-600 hover:underline">
-            Create one
+          Already have an account?{" "}
+          <Link to="/login" className="text-blue-600 hover:underline">
+            Login
           </Link>
         </p>
       </div>
@@ -59,5 +77,4 @@ function Login() {
   );
 }
 
-export default Login;
-  
+export default Signup;
