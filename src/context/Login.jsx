@@ -20,7 +20,7 @@ export const LoginProvider = ({ children }) => {
   const login = (userData) => {
     console.log(userData);
     api
-      .post("/login", {
+      .post("/users/login", {
         email: userData.email,
         password: userData.password,
       })
