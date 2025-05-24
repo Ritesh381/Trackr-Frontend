@@ -15,25 +15,9 @@ function Search() {
            className='p-4 w-200 border-2 border-blue-200 rounded-xl shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-300 focus:border-blue-500 transition-all duration-300 text-lg placeholder-gray-400 bg-white hover:shadow-xl'
         />
       </form>
-<<<<<<< HEAD
       <div className='flex m-5 flex-wrap gap-8 justify-center px-4'>
         <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
       </div>
-=======
-      
->>>>>>> 78fae900fc1d9aaf5911b24207096cac8713451b
     </div>
   )
 }

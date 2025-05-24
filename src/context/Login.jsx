@@ -51,7 +51,7 @@ export const LoginProvider = ({ children }) => {
     console.log("Sending signup data:", userData);
 
     api
-      .post("/users/signup", {
+      .post("/users/register", {
         email: userData.email,
         password: userData.password,
       })
