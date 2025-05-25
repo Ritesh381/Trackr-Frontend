@@ -20,6 +20,20 @@ export const LoginProvider = ({ children }) => {
   //   }
   // }, []);
 
+  // useEffect(() => {
+  //   const storedUser = localStorage.getItem("user");
+  //   if( storedUser ) {  
+  //     const parsedUser = JSON.parse(storedUser);
+  //     setUser(parsedUser);
+  //     setIsLoggedIn(true);
+  //     setId(parsedUser.id);
+  //   } else {
+  //     setUser(null);
+  //     setIsLoggedIn(false);
+  //     setId(null);
+  //   }
+  // }, []);
+
   const login = async (userData) => {
     const { email, password } = userData;
 

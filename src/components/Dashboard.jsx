@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { LoginContext } from '../context/Login';
 import { Link } from 'react-router-dom';
+import supabase from '../assets/supabase';
 
 const dummyColleges = [
   { id: 1, name: 'Stanford University' },
@@ -8,14 +9,11 @@ const dummyColleges = [
   { id: 3, name: 'Harvard University' },
 ];
 
-const dummyDeadlines = [
-  { id: 1, title: 'Apply for Fall 2025', date: '2025-06-30' },
-  { id: 2, title: 'Scholarship Application', date: '2025-05-15' },
-  { id: 3, title: 'Submit Transcripts', date: '2025-05-01' },
-];
-
 function Dashboard() {
-  const { isLoggedIn } = useContext(LoginContext);
+  const { isLoggedIn, Id} = useContext(LoginContext);
+  const [deadlines, setDeadlines] = useState([]);
+  const [starredDeadlines, setStarredDeadlines] = useState([]);
+  const [colleges, setColleges] = useState([]); 
 
   if (!isLoggedIn) {
     return (
@@ -27,6 +25,88 @@ function Dashboard() {
       </div>
     );
   }
+
+  useEffect(() => {
+    const fetchDeadlines = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('Users')
+          .select('deadline_id')
+          .eq('id', Id);
+
+        if (error) {
+          console.error('Error fetching deadlines:', error);
+        } else {
+          console.log('Fetched deadlines:', data[0].deadline_id);
+          setStarredDeadlines(data[0].deadline_id);
+        }
+      } catch (err) {
+        console.error('Unexpected error fetching deadlines:', err);
+      }
+    };
+
+    fetchDeadlines();
+  },[Id]);
+
+  useEffect(() => {
+    const fetchDeadlines = async () => {
+    const { data: deadlinesData, error: deadlinesError } = await supabase
+      .from("Deadlines")
+      .select("*")
+      .order("Due_Date", { ascending: true });
+
+    if (deadlinesError) {
+      console.error("Error fetching deadlines:", deadlinesError);
+    } else {
+      setDeadlines(deadlinesData);
+      console.log("Deadlines fetched successfully:", deadlinesData);
+    }
+  };
+
+  fetchDeadlines();
+  }
+  , [Id]);
+
+  useEffect(() => {
+    const fetchColleges = async () => {
+      const { data, error } = await supabase
+        .from("Colleges")
+        .select("*")
+
+      if (error) {
+        console.error("Error fetching colleges:", error);
+      } else {
+        console.log("Colleges fetched:", data);
+        setColleges(data);
+      }
+    };
+
+    fetchColleges();
+  }, []);
+
+  useEffect(() => {
+    const fetchStarredColleges = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('Users')
+          .select('college_id')
+          .eq('id', Id);
+
+        if (error) {
+          console.error('Error fetching starred colleges:', error);
+        } else {
+          console.log('Starred colleges fetched:', data);
+          setStarredDeadlines(data[0].starred_colleges || []);
+        }
+      } catch (err) {
+        console.error('Unexpected error fetching starred colleges:', err);
+      }
+    };
+
+    fetchStarredColleges();
+  }
+  , [Id]);
+
 
   return (
     <div className="flex p-6 space-x-6 min-h-[80vh]">
@@ -52,17 +132,20 @@ function Dashboard() {
   {/* Right Side - Deadlines */}
   <div className="w-1/2 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
     <h2 className="text-2xl font-semibold text-blue-700 mb-6">📅 Upcoming Deadlines</h2>
-    {dummyDeadlines.length > 0 ? (
+    {deadlines.length > 0 ? (
       <ul className="space-y-3">
-        {dummyDeadlines.map((deadline) => (
-          <li
-            key={deadline.id}
-            className="p-3 border border-blue-400 rounded-xl flex justify-between items-center hover:bg-blue-100 hover:border-blue-600 transition duration-200"
-          >
-            <span className="text-blue-700 font-medium">{deadline.title}</span>
-            <span className="text-sm text-blue-600">{deadline.date}</span>
-          </li>
-        ))}
+        {deadlines
+  .filter((deadline) => starredDeadlines.includes(deadline.DId))
+  .map((deadline) => (
+    <li
+      key={deadline.DId}
+      className="p-3 border border-blue-400 rounded-xl flex justify-between items-center hover:bg-blue-100 hover:border-blue-600 transition duration-200"
+    >
+      <span className="text-blue-700 font-medium">{deadline.Task}</span>
+      <span className="text-sm text-blue-600">{deadline.Due_Date}</span>
+    </li>
+))}
+
       </ul>
     ) : (
       <p className="text-gray-600">No upcoming deadlines.</p>
