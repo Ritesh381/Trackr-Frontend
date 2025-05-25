@@ -10,15 +10,15 @@ export const LoginProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [Id, setId] = useState(null);
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    const storedIsLoggedIn = localStorage.getItem("isLoggedIn");
+  // useEffect(() => {
+  //   const storedUser = localStorage.getItem("user");
+  //   const storedIsLoggedIn = localStorage.getItem("isLoggedIn");
 
-    if (storedUser && storedIsLoggedIn === "true") {
-      setUser(JSON.parse(storedUser));
-      setIsLoggedIn(true);
-    }
-  }, []);
+  //   if (storedUser && storedIsLoggedIn === "true") {
+  //     setUser(JSON.parse(storedUser));
+  //     setIsLoggedIn(true);
+  //   }
+  // }, []);
 
   const login = async (userData) => {
     const { email, password } = userData;
