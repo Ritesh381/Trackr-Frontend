@@ -15,7 +15,7 @@ const dummyDeadlines = [
 ];
 
 function Dashboard() {
-  const { isLoggedIn, user } = useContext(LoginContext);
+  const { isLoggedIn } = useContext(LoginContext);
 
   if (!isLoggedIn) {
     return (

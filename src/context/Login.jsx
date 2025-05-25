@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import api from "../assets/axios";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import supabase from "../assets/supabase";
 
 export const LoginContext = React.createContext();
 
@@ -9,60 +8,84 @@ export const LoginProvider = ({ children }) => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
+  const [Id, setId] = useState(null);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     const storedIsLoggedIn = localStorage.getItem("isLoggedIn");
-    if (storedUser) {
-      setUser(storedUser);
-      setIsLoggedIn(storedIsLoggedIn === "true");
+
+    if (storedUser && storedIsLoggedIn === "true") {
+      setUser(JSON.parse(storedUser));
+      setIsLoggedIn(true);
     }
   }, []);
 
-  const login = (userData) => {
-    if (!userData.email || !userData.password) {
-      console.error("Missing email or password");
+  const login = async (userData) => {
+    const { email, password } = userData;
+
+    if (!email || !password) {
+      alert("Please enter both email and password.");
       return;
     }
-    console.log("Sending userData:", userData);
-    api
-      .post("/users/login", {
-        email: userData.email,
-        password: userData.password,
-      })
-      .then((response) => {
-        console.log("Login successful:", response.data);
-        setUser(response.data.user);
+
+    try {
+      const { data, error } = await supabase
+        .from("Users")
+        .select("*")
+        .eq("email", email)
+        .eq("password", password)
+        .single();
+
+      if (error) {
+        console.error("Login failed:", error.message);
+        alert("Something went wrong. Please try again later.");
+        return;
+      }
+
+      if (data) {
+        console.log("Login successful:", data);
+        setUser(data);
         setIsLoggedIn(true);
-        localStorage.setItem("user", JSON.stringify(response.data.user));
+        setId(data.id);
+        localStorage.setItem("user", JSON.stringify(data));
         localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("Id", data.id);
         navigate("/dashboard");
-      })
-      .catch((err) => {
-        console.error("Login failed:", err?.response?.data || err.message);
-      });
+      } else {
+        alert("Incorrect email or password.");
+      }
+    } catch (err) {
+      console.error("Unexpected error during login:", err);
+      alert("An unexpected error occurred. Please try again later.");
+    }
   };
 
-  const signup = (userData) => {
-    if (!userData.email || !userData.password) {
-      console.error("Missing username, email, or password");
+  const signup = async (userData) => {
+    const { email, password, username } = userData;
+
+    if (!email || !password || !username) {
+      alert("Please fill all fields.");
       return;
     }
 
-    console.log("Sending signup data:", userData);
+    try {
+      const { data, error } = await supabase
+        .from("Users")
+        .insert([{ email, password, username }])
+        .select();
 
-    api
-      .post("/users/register", {
-        email: userData.email,
-        password: userData.password,
-      })
-      .then((response) => {
-        console.log("Signup successful:", response.data);
+      if (error) {
+        console.error("Signup failed:", error.message);
+        alert("Signup failed. Try again later.");
+      } else {
+        console.log("Signup successful:", data);
+        alert("Signup successful. Please login.");
         navigate("/login");
-      })
-      .catch((err) => {
-        console.error("Signup failed:", err?.response?.data || err.message);
-      });
+      }
+    } catch (err) {
+      console.error("Unexpected signup error:", err);
+      alert("Unexpected error. Please try again later.");
+    }
   };
 
   const logout = () => {
@@ -73,7 +96,7 @@ export const LoginProvider = ({ children }) => {
   };
 
   return (
-    <LoginContext.Provider value={{ isLoggedIn, user, login, logout, signup }}>
+    <LoginContext.Provider value={{ isLoggedIn, user, login, logout, signup, Id }}>
       {children}
     </LoginContext.Provider>
   );
