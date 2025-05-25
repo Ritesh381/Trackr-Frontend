@@ -12,7 +12,6 @@ function Search() {
         .from("Colleges")
         .select("*")
         // .order("name", { ascending: true });
-
       if (error) {
         console.error("Error fetching colleges:", error);
       } else {
