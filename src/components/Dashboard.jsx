@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom';
 import supabase from '../assets/supabase';
 
 const dummyColleges = [
-  { id: 1, name: 'Stanford University' },
-  { id: 2, name: 'MIT' },
-  { id: 3, name: 'Harvard University' },
+  { id: 1, name: 'VIT Vellore' },
+  { id: 2, name: 'BITS Pilani' },
+  { id: 3, name: 'MSRIT' },
+  { id: 4, name: 'IIT Bombay' },
 ];
 
 function Dashboard() {
