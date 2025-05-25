@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import banner from "../assets/banner.jpg";
 import StatsChart from "./StatsChart";
 import AOS from "aos";
+import { Link } from "react-router-dom";
 
 function Landing() {
   useEffect(() => {
@@ -82,12 +83,12 @@ function Landing() {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center py-8 px-4">
-          <button className="text-lg sm:text-xl text-white font-semibold bg-gradient-to-r from-sky-500 to-blue-600 rounded-xl border-2 border-blue-300 transition-all hover:scale-105 hover:from-sky-600 hover:to-blue-700 hover:border-blue-400 w-full sm:w-[200px] h-[45px]">
+          <Link to="/search" className="text-lg sm:text-xl text-white font-semibold bg-gradient-to-r from-sky-500 to-blue-600 rounded-xl border-2 border-blue-300 transition-all hover:scale-105 hover:from-sky-600 hover:to-blue-700 hover:border-blue-400 w-full sm:w-[200px] h-[45px] text-center">
             Explore Colleges
-          </button>
-          <button className="text-lg sm:text-xl text-blue-700 font-semibold bg-gradient-to-r from-white to-blue-50 rounded-xl border-2 border-blue-300 transition-all hover:scale-105 hover:border-blue-400 w-full sm:w-[200px] h-[45px]">
+          </Link>
+          <Link to="deadline" className="text-lg sm:text-xl text-blue-700 font-semibold bg-gradient-to-r from-white to-blue-50 rounded-xl border-2 border-blue-300 transition-all hover:scale-105 hover:border-blue-400 w-full sm:w-[200px] h-[45px] text-center">
             Important Deadlines
-          </button>
+          </Link>
         </div>
       </div>
     </div>
